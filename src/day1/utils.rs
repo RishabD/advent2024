@@ -4,9 +4,7 @@ use std::io::{self, BufRead};
 pub fn read_input() -> (Vec<i32>, Vec<i32>) {
     let mut left: Vec<i32> = Vec::new();
     let mut right: Vec<i32> = Vec::new();
-
-    let file = File::open("input.txt").unwrap();
-    let reader = io::BufReader::new(file);
+    let reader = io::BufReader::new(File::open("input.txt").unwrap());
     for line in reader.lines() {
         let content = line.unwrap();
         let mut parts = content.split_whitespace();
@@ -23,6 +21,5 @@ pub fn read_input() -> (Vec<i32>, Vec<i32>) {
             panic!();
         }
     }
-
     return (left, right);
 }
