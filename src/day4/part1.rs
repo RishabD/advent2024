@@ -1,6 +1,6 @@
 use crate::day4::utils;
 
-const DIRECTIONS: &'static [(i32, i32)] = &[
+const DIRECTIONS: &[(i32, i32)] = &[
     (1, 0),
     (0, 1),
     (-1, 0),
@@ -13,8 +13,7 @@ const DIRECTIONS: &'static [(i32, i32)] = &[
 
 pub fn run() {
     let puzzle = utils::read_input();
-    let n = puzzle.len() as i32;
-    let m = puzzle[0].len() as i32;
+    let (n, m) = (puzzle.len() as i32, puzzle[0].len() as i32);
     let total = (0..n)
         .map(|i| {
             (0..m)
@@ -28,11 +27,11 @@ pub fn run() {
                                 0
                             }
                         })
-                        .sum::<i32>()
+                        .sum::<u32>()
                 })
-                .sum::<i32>()
+                .sum::<u32>()
         })
-        .sum::<i32>();
+        .sum::<u32>();
     println!("Total: {}", total);
 }
 

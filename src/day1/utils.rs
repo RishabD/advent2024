@@ -5,21 +5,15 @@ pub fn read_input() -> (Vec<i32>, Vec<i32>) {
     let mut left: Vec<i32> = Vec::new();
     let mut right: Vec<i32> = Vec::new();
     let reader = io::BufReader::new(File::open("input.txt").unwrap());
-    for line in reader.lines() {
+    reader.lines().for_each(|line| {
         let content = line.unwrap();
         let mut parts = content.split_whitespace();
-        if let (Some(first), Some(second)) = (parts.next(), parts.next()) {
-            if let (Ok(num1), Ok(num2)) = (first.parse::<i32>(), second.parse::<i32>()) {
-                left.push(num1);
-                right.push(num2);
-            } else {
-                eprintln!("Failed to parse numbers in line: {}", content);
-                panic!();
-            }
-        } else {
-            eprintln!("Line doesn't have two parts: {}", content);
-            panic!();
-        }
-    }
+        let (left_num, right_num) = (
+            parts.next().unwrap().parse::<i32>().unwrap(),
+            parts.next().unwrap().parse::<i32>().unwrap(),
+        );
+        left.push(left_num);
+        right.push(right_num);
+    });
     return (left, right);
 }

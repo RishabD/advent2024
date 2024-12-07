@@ -1,28 +1,28 @@
 use crate::day2::utils;
 
 pub fn run() {
-    let levels = utils::read_input();
-    let count: i32 = levels
+    let reports = utils::read_input();
+    let total: i32 = reports
         .iter()
-        .map(level_is_safe_variants)
+        .map(report_or_variants_is_safe)
         .map(|is_safe| if is_safe { 1 } else { 0 })
         .sum();
-    println!("The number of safe levels is {}", count)
+    println!("Total {}", total)
 }
 
 // Brute force scales for small number of levels
-fn level_is_safe_variants(level: &Vec<i32>) -> bool {
-    if utils::level_is_safe(level) {
+fn report_or_variants_is_safe(report: &Vec<i32>) -> bool {
+    if utils::report_is_safe(report) {
         return true;
     }
-    for i in 0..level.len() {
-        let new_level: Vec<i32> = level
+    for i in 0..report.len() {
+        let new_report: Vec<i32> = report
             .iter()
             .enumerate()
             .filter(|(index, _)| i != *index)
             .map(|(_, val)| *val)
             .collect();
-        if utils::level_is_safe(&new_level) {
+        if utils::report_is_safe(&new_report) {
             return true;
         }
     }

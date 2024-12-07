@@ -1,22 +1,21 @@
 use crate::day4::utils;
 
-const CORNERS: &'static [(i32, i32)] = &[(1, 1), (1, -1), (-1, -1), (-1, 1)];
+const CORNERS: &[(i32, i32)] = &[(1, 1), (1, -1), (-1, -1), (-1, 1)];
 
 pub fn run() {
     let puzzle = utils::read_input();
-    let n = puzzle.len() as i32;
-    let m = puzzle[0].len() as i32;
+    let (n, m) = (puzzle.len() as i32, puzzle[0].len() as i32);
     let total = (1..n - 1)
         .map(|i| {
             (1..m - 1)
-                .map(|j| if word_search(&puzzle, i, j) { 1 } else { 0 })
+                .map(|j| if is_cross_mas(&puzzle, i, j) { 1 } else { 0 })
                 .sum::<i32>()
         })
         .sum::<i32>();
     println!("Total: {}", total);
 }
 
-fn word_search(puzzle: &Vec<Vec<char>>, i: i32, j: i32) -> bool {
+fn is_cross_mas(puzzle: &Vec<Vec<char>>, i: i32, j: i32) -> bool {
     if puzzle[i as usize][j as usize] != 'A' {
         return false;
     }

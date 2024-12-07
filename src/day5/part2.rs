@@ -7,13 +7,9 @@ pub fn run() {
     let total = updates
         .iter()
         .map(|update| {
-            let modified_update = utils::sort_update(&update, &pages_to_pages_it_cannot_be_behind);
-            if modified_update
-                .iter()
-                .zip(update.iter())
-                .any(|(a, b)| a != b)
-            {
-                return modified_update[modified_update.len() / 2];
+            let new_update = utils::sort_update(&update, &pages_to_pages_it_cannot_be_behind);
+            if new_update.iter().zip(update.iter()).any(|(a, b)| a != b) {
+                return new_update[new_update.len() / 2];
             }
             return 0;
         })

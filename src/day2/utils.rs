@@ -16,27 +16,27 @@ pub fn read_input() -> Vec<Vec<i32>> {
     return result;
 }
 
-pub fn level_is_safe(level: &Vec<i32>) -> bool {
-    return (strict_ascending(level) || strict_descending(level)) && valid_diffs(level);
+pub fn report_is_safe(report: &Vec<i32>) -> bool {
+    return (strict_ascending(report) || strict_descending(report)) && valid_diffs(report);
 }
 
-fn strict_ascending(level: &Vec<i32>) -> bool {
-    return level
+fn strict_ascending(report: &Vec<i32>) -> bool {
+    return report
         .iter()
-        .zip(level.iter().skip(1))
+        .zip(report.iter().skip(1))
         .all(|(first, second)| first < second);
 }
 
-fn strict_descending(level: &Vec<i32>) -> bool {
-    return level
+fn strict_descending(report: &Vec<i32>) -> bool {
+    return report
         .iter()
-        .zip(level.iter().skip(1))
+        .zip(report.iter().skip(1))
         .all(|(first, second)| first > second);
 }
 
-fn valid_diffs(level: &Vec<i32>) -> bool {
-    return level
+fn valid_diffs(report: &Vec<i32>) -> bool {
+    return report
         .iter()
-        .zip(level.iter().skip(1))
+        .zip(report.iter().skip(1))
         .all(|(first, second)| first != second && (first - second).abs() <= 3);
 }

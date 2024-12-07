@@ -4,14 +4,15 @@ use crate::day3::utils;
 
 pub fn run() {
     let program = utils::read_input();
-    let re = Regex::new(r"(mul\(\d+,\d+\))").unwrap();
+    let multiply_regex = Regex::new(r"(mul\(\d+,\d+\))").unwrap();
     let total = program
         .iter()
         .map(|program_line| {
-            re.captures_iter(&program_line)
-                .map(|capture| utils::perform_mult(&capture[0]))
-                .sum::<i32>()
+            multiply_regex
+                .captures_iter(&program_line)
+                .map(|capture| utils::perform_multiply(&capture[0]))
+                .sum::<u32>()
         })
-        .sum::<i32>();
-    println!("The total of all mults is {}", total)
+        .sum::<u32>();
+    println!("Total: {}", total)
 }
